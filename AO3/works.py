@@ -653,7 +653,7 @@ class Work:
         """
 
         words = self._soup.find("dd", {"class": "words"})
-        if words is not None:
+        if words is not None and words.string is not None:
             return int(self.str_format(words.string))
         return 0
 
