@@ -8,7 +8,7 @@ https://ao3-api.readthedocs.io
 
 __Source code repository and issue tracker__
 
-https://github.com/ArmindoFlores/ao3_api
+https://github.com/wendytg/ao3_api
 
 __License__
 
