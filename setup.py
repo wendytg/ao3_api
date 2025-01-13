@@ -9,14 +9,13 @@ with open("requirements.txt", "r") as fh:
 setuptools.setup(
     name="ao3-api",
     version="2.3.0",
-    author="Francisco Rodrigues",
-    author_email="francisco.rodrigues0908@gmail.com",
+    author="Wendy",
     description="An unofficial AO3 (archiveofourown.org) API",
     python_requires='>=3.8',
     install_requires=requires,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ArmindoFlores/ao3_api",
+    url="https://github.com/wendytg/ao3_api",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
