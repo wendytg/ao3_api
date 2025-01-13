@@ -14,7 +14,7 @@ pip install ao3_api
 
 # Github
 
-https://github.com/ArmindoFlores/ao3_api
+https://github.com/wendytg/ao3_api
 
 
 # Usage
@@ -278,7 +278,7 @@ To download a resource, simply use `AO3.extra.download(resource_name)`. To downl
 
 # Contact info
 
-For information or bug reports please contact francisco.rodrigues0908@gmail.com.
+For information or bug reports, please create an issue or start a discussion.
 
 
 # License
