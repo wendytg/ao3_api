@@ -552,21 +552,35 @@ class Session(GuestSession):
         Returns:
             works (list): All marked for later works
         """
-        pageRaw = self.request(f"https://archiveofourown.org/users/{self.username}/readings?page=1&show=to-read").find("ol", {"class": "pagination actions"}).find_all("li")
-        maxPage = int(pageRaw[len(pageRaw)-2].text)
+
+        # this sub-function is a bit ugly but it prevents code duplication
+        def get_works_from_raw(works_raw):
+            works = []
+            for work in worksRaw:
+                try:
+                    workId = int(work.h4.a.get("href").split("/")[2])
+                    works.append(Work(workId, session=self, load=False))
+                except AttributeError:
+                    pass
+            return works
+        
+        try:
+            # if this succeeds there is at least 2 pages
+            pageRaw = self.request(f"https://archiveofourown.org/users/{self.username}/readings?page=1&show=to-read").find("ol", {"class": "pagination actions"}).find_all("li")
+        except AttributeError:
+            # there is only one page. Get the works and return early
+            worksRaw = self.request(f"https://archiveofourown.org/users/{self.username}/readings?show=to-read").find_all("li", {"role": "article"})
+            return get_works_from_raw(worksRaw)
+
         works = []
+        maxPage = int(pageRaw[len(pageRaw)-2].text)
         for page in range(maxPage):
             grabbed = False
-            while grabbed == False:
+            while not grabbed:
                 try:
                     workPage = self.request(f"https://archiveofourown.org/users/{self.username}/readings?page={page+1}&show=to-read")
                     worksRaw = workPage.find_all("li", {"role": "article"})
-                    for work in worksRaw:
-                        try:
-                            workId = int(work.h4.a.get("href").split("/")[2])
-                            works.append(Work(workId, session=self, load=False))
-                        except AttributeError:
-                            pass
+                    works.extend(get_works_from_raw(worksRaw))
                     grabbed = True
                 except utils.HTTPError:
                     time.sleep(timeout_sleep)
