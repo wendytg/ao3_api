@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ao3-api"
+version = "2.3.1"
+authors = [
+  { name="Wendy" },
+]
+description = "An unofficial AO3 (archiveofourown.org) API"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["ao3", "fanfiction", "Archive of Our Own"]
+
+dependencies = [
+    "BeautifulSoup4",
+    "lxml",
+    "requests"
+]
+
+[project.urls]
+Homepage = "https://github.com/wendytg/ao3_api"
+Issues = "https://github.com/wendytg/ao3_api/issues"
+Documentation = "https://ao3-api.readthedocs.io/"
